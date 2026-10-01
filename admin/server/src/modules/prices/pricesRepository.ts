@@ -1,7 +1,7 @@
 import { sqlBaseRepository } from '#common/baseRepository';
 import { DBProvider } from 'src/db/provider';
 import { categoriesTable, pricesTable } from 'src/db/schema';
-import { and, eq } from 'drizzle-orm';
+import { and, desc, eq } from 'drizzle-orm';
 import { PriceEntity } from './priceEntity';
 
 export type PricesRepository = ReturnType<typeof pricesRepository>;
@@ -29,7 +29,7 @@ export function pricesRepository(dbProvider: DBProvider) {
         categoriesTable,
         eq(pricesTable.categoryId, categoriesTable.id),
       )
-      .orderBy(pricesTable.position);
+      .orderBy(desc(categoriesTable.sortOrder), pricesTable.categoryId, pricesTable.position);
   }
 
   async function findByCategoryAndDuration(categoryId: string, duration: string) {
