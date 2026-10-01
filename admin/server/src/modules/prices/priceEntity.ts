@@ -5,4 +5,5 @@ export interface PriceEntity {
   importantInfo: string;
   duration: string;
   price: string;
+  position?: number;
 }

@@ -22,12 +22,14 @@ export function pricesRepository(dbProvider: DBProvider) {
         importantInfo: pricesTable.importantInfo,
         duration: pricesTable.duration,
         price: pricesTable.price,
+        position: pricesTable.position,
       })
       .from(pricesTable)
       .innerJoin(
         categoriesTable,
         eq(pricesTable.categoryId, categoriesTable.id),
-      );
+      )
+      .orderBy(pricesTable.position);
   }
 
   async function findByCategoryAndDuration(categoryId: string, duration: string) {

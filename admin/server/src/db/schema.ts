@@ -70,6 +70,7 @@ export const pricesTable = pgTable('prices', {
   importantInfo: text('important_info').notNull(),
   duration: text('duration').notNull(),
   price: numeric('price').notNull(),
+  position: integer('position').notNull().default(0),
 });
 
 export const collectionsTable = pgTable(
